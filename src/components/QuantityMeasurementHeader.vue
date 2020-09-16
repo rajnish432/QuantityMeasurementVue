@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <h1>{{message}}</h1>
+  <div class="header">
+    <md-toolbar class="md-primary">
+      <h3 class="md-title">Welcome To Quantity Measurement</h3>
+    </md-toolbar>
   </div>
 </template>
 
@@ -15,7 +17,14 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .header{
+    display: flex;
+    align-items: center;
+  }
+  .md-toolbar.md-theme-default.md-primary{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
 </style>
