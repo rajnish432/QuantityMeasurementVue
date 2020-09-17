@@ -2,7 +2,7 @@
   <div class="card-container">
     <div class="type">CHOOSE TYPE</div>
     <div>
-      <md-card>
+      <md-card v-on:click.native="selectType('length','#edfdf9',' #0ec098')" id="length">
         <md-card-header>
           <md-card-media>
             <img class="logo" v-bind:src="require('../assets/'+scalesrc)" />
@@ -10,7 +10,7 @@
         </md-card-header>
       </md-card>
 
-      <md-card id="card2">
+      <md-card id="card2" v-on:click.native="selectType('card2','#ffeef0','#fd5160')">
         <md-card-header>
           <md-card-media>
             <img class="other-logo" v-bind:src="require('../assets/'+tempsrc)" />
@@ -18,7 +18,7 @@
         </md-card-header>
       </md-card>
 
-      <md-card id="card3">
+      <md-card id="card3" v-on:click.native="selectType('card3',' #e8ddff',' #7224ff')">
         <md-card-header>
           <md-card-media>
             <img class="logo other-logo" v-bind:src="require('../assets/'+volumesrc)" />
@@ -37,7 +37,22 @@ export default {
       scalesrc: "scalefilled.png",
       tempsrc: "hotfilled.png",
       volumesrc: "beakerfilled.png",
+      selected: "",
     };
+  },
+  methods: {
+    selectType: function (selectedUnit, background, border) {
+      var styleproperty = document.getElementById(selectedUnit).style;
+      if (this.selected.length != 0) {
+        document.getElementById(this.selected).setAttribute("style", "");
+      }
+      styleproperty.filter = "grayscale(0%)";
+      styleproperty.opacity = "1";
+      styleproperty.border = "1px solid " + border;
+      styleproperty.color = border;
+      styleproperty.backgroundColor = background;
+      this.selected = selectedUnit;
+    },
   },
 };
 </script>
@@ -48,7 +63,7 @@ export default {
   flex-direction: column;
   margin-top: 6%;
   width: 45%;
-  height: 300px;
+  height: 200px;
 }
 
 .md-card {
