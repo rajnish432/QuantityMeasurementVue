@@ -8,23 +8,19 @@
 
 <script>
 export default {
-  name: 'QuantityMeasurementHeader',
-  data(){
-    return{
-      message:'Welcome to QuantityMeasurement'
-    }
-  }
-}
+  name: "QuantityMeasurementHeader",
+};
 </script>
 
 <style scoped>
-  .header{
-    display: flex;
-    align-items: center;
-  }
-  .md-toolbar.md-theme-default.md-primary{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-  }
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.md-toolbar.md-theme-default.md-primary {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
 </style>

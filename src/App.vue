@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <QuantityMeasurementHeader/>
+    <QuantityMeasurementHeader />
+    <QuantityMeasurementCards />
   </div>
 </template>
 
 <script>
-import QuantityMeasurementHeader from './components/QuantityMeasurementHeader.vue'
+import QuantityMeasurementHeader from "./components/QuantityMeasurementHeader.vue";
+import QuantityMeasurementCards from "./components/QuantityMeasurmentCards.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    QuantityMeasurementHeader
-  }
-}
+    QuantityMeasurementHeader,
+    QuantityMeasurementCards,
+  },
+};
 </script>
 
 <style>
@@ -21,7 +24,8 @@ export default {
   display: flex;
   width: 100%;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  padding-bottom: 10%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
