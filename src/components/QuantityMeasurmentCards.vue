@@ -46,15 +46,15 @@ export default {
 .card-container {
   display: flex;
   flex-direction: column;
-  margin-top: 10%;
-  width: 40%;
+  margin-top: 6%;
+  width: 45%;
   height: 300px;
 }
 
 .md-card {
-  border-radius: 15px;
+  border-radius: 7px;
   padding: 10px;
-  margin: 10px;
+  margin: 15px;
   width: 173px;
   height: 137px;
   display: inline-block;
@@ -101,7 +101,7 @@ export default {
   text-align: start;
   font-family: system-ui;
   font-size: large;
-  padding-left: 25px;
+  padding-left: 50px;
   font-weight: 600;
 }
 
