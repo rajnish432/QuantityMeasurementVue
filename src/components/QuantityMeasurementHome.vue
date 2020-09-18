@@ -12,7 +12,7 @@ import QuantityMeasurmentCards from "./QuantityMeasurmentCards";
 import QuantityMeasurementConversion from "./QuantityMeasurementConversion";
 
 export default {
-  name: "QuantityMeasurementHome",
+  name: "QuantityMeasurementHome",  
   components: {
     QuantityMeasurementHeader,
     QuantityMeasurmentCards,
@@ -21,4 +21,4 @@ export default {
 };
 </script>
 <style scoped>
-</style>>
+</style>

@@ -63,7 +63,6 @@ export default {
   flex-direction: column;
   margin-top: 6%;
   width: 45%;
-  height: 200px;
 }
 
 .md-card {
