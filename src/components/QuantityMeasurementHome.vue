@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <QuantityMeasurementHeader />
-    <QuantityMeasurmentCards />
-    <QuantityMeasurementConversion />
+    <QuantityMeasurmentCards v-bind:unit="unit" v-on:selectType=" updateUnit($event)" />
+    <QuantityMeasurementConversion v-bind:unit="unit" />
   </div>
 </template>
 
@@ -12,11 +12,22 @@ import QuantityMeasurmentCards from "./QuantityMeasurmentCards";
 import QuantityMeasurementConversion from "./QuantityMeasurementConversion";
 
 export default {
-  name: "QuantityMeasurementHome",  
+  name: "QuantityMeasurementHome",
+  data() {
+    return {
+      unit: "",
+    };
+  },
+
   components: {
     QuantityMeasurementHeader,
     QuantityMeasurmentCards,
     QuantityMeasurementConversion,
+  },
+  methods: {
+    updateUnit: function (updatedUnit) {
+      this.unit = updatedUnit;
+    },
   },
 };
 </script>

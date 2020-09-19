@@ -9,11 +9,13 @@
         <md-field>
           <md-input v-model="initial1"></md-input>
         </md-field>
-        <select name="firstUnit" class="units">
-          <option value="meters">METERS</option>
-          <option value="centimeters">CENTIMETERS</option>
-          <option value="inch">INCH</option>
-          <option value="feet">FEET</option>
+        <select
+          v-on:click="updateSubUnit"
+          name="firstUnit"
+          class="units"
+          v-model="selectedFirstUnit"
+        >
+          <option v-for="subunit in subUnits" v-bind:key="subunit">{{subunit}}</option>
         </select>
       </md-content>
 
@@ -21,11 +23,13 @@
         <md-field>
           <md-input v-model="initial2"></md-input>
         </md-field>
-        <select name="secondUnit" class="units">
-          <option value="meters">METERS</option>
-          <option value="centimeters">CENTIMETERS</option>
-          <option value="inch">INCH</option>
-          <option value="feet">FEET</option>
+        <select
+          v-on:click="updateSubUnit"
+          name="secondUnit"
+          class="units"
+          v-model="selectedSecondUnit"
+        >
+          <option v-for="subunit in subUnits" v-bind:key="subunit">{{subunit}}</option>
         </select>
       </md-content>
     </div>
@@ -34,15 +38,33 @@
 
 <script>
 export default {
-  name: "",
+  name: "QuantityMeasurementConversion",
+  props: {
+    unit: {
+      type: String,
+    },
+  },
   data() {
     return {
       initial1: "1",
       initial2: "1000",
-      subUnits: ["Meters", "Centimeters", "Milimeter"],
-      selectedFirstUnit: null,
-      selectedSecondUnit: null,
+      subUnits: [""],
+      selectedFirstUnit: "",
+      selectedSecondUnit: "",
     };
+  },
+  methods: {
+    updateSubUnit: function () {
+      if (this.unit == "length") {
+        this.subUnits = ["Meters", "Centimeters", "Milimeter"];
+      }
+      if (this.unit == "temp") {
+        this.subUnits = ["Degree", "Celcius", "Farenheit"];
+      }
+      if (this.unit == "volume") {
+        this.subUnits = ["litre", "Mililitre"];
+      }
+    },
   },
 };
 </script>

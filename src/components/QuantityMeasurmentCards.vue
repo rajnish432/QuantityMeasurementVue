@@ -10,7 +10,7 @@
         </md-card-header>
       </md-card>
 
-      <md-card id="card2" v-on:click.native="selectType('card2','#ffeef0','#fd5160')">
+      <md-card id="temp" v-on:click.native="selectType('temp','#ffeef0','#fd5160')">
         <md-card-header>
           <md-card-media>
             <img class="other-logo" v-bind:src="require('../assets/'+tempsrc)" />
@@ -18,7 +18,7 @@
         </md-card-header>
       </md-card>
 
-      <md-card id="card3" v-on:click.native="selectType('card3',' #e8ddff',' #7224ff')">
+      <md-card id="volume" v-on:click.native="selectType('volume',' #e8ddff',' #7224ff')">
         <md-card-header>
           <md-card-media>
             <img class="logo other-logo" v-bind:src="require('../assets/'+volumesrc)" />
@@ -32,6 +32,11 @@
 <script>
 export default {
   name: "QuantityMeasurementCards",
+  props: {
+    unit: {
+      type: String,
+    },
+  },
   data() {
     return {
       scalesrc: "scalefilled.png",
@@ -52,6 +57,7 @@ export default {
       styleproperty.color = border;
       styleproperty.backgroundColor = background;
       this.selected = selectedUnit;
+      this.$emit("selectType", selectedUnit);
     },
   },
 };
@@ -91,7 +97,7 @@ export default {
   filter: grayscale(0%);
 }
 
-#card2:hover {
+#temp:hover {
   background: #ffeef0 0% 0% no-repeat padding-box;
   border: 1px solid #fd5160;
   letter-spacing: 0px;
@@ -99,7 +105,7 @@ export default {
   text-transform: capitalize;
 }
 
-#card3:hover {
+#volume:hover {
   background: #e8ddff 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
   border: 1px solid #7224ff;
