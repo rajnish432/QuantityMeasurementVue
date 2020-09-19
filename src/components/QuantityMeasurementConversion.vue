@@ -135,4 +135,11 @@ export default {
   padding: 5px;
   border: 1px solid #e7dcfe;
 }
+
+@media screen and (max-width: 479px) {
+  .conversion-container{
+    height: 153px;
+    width: 90%;
+  }
+}
 </style>

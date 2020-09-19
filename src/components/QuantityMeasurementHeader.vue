@@ -44,4 +44,17 @@ button {
   background-color: transparent;
   border: none;
 }
+
+@media screen and (max-width: 380px) {
+  .md-toolbar .md-title {
+    letter-spacing: 0em;
+  }
+}
+
+@media screen and (max-width: 330px) {
+   .md-toolbar .md-title {
+    letter-spacing: 0em;
+    white-space: normal;
+  }
+}
 </style>

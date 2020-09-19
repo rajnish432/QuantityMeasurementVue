@@ -137,4 +137,22 @@ export default {
 .other-logo {
   width: 42px;
 }
+
+@media screen and (max-width: 479px) {
+  .card-container {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .card-container {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .card-container {
+    width: 70%;
+  }
+}
 </style>
