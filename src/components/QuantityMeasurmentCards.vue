@@ -2,7 +2,7 @@
   <div class="card-container">
     <div class="type">CHOOSE TYPE</div>
     <div>
-      <md-card v-on:click.native="selectType('length','#edfdf9',' #0ec098')" id="length">
+      <md-card v-on:click.native="selectType(mainUnit[0],'#edfdf9',' #0ec098')" id="LENGTH">
         <md-card-header>
           <md-card-media>
             <img class="logo" v-bind:src="require('../assets/'+scalesrc)" />
@@ -10,7 +10,7 @@
         </md-card-header>
       </md-card>
 
-      <md-card id="temp" v-on:click.native="selectType('temp','#ffeef0','#fd5160')">
+      <md-card id="TEMPERATURE" v-on:click.native="selectType(mainUnit[3],'#ffeef0','#fd5160')">
         <md-card-header>
           <md-card-media>
             <img class="other-logo" v-bind:src="require('../assets/'+tempsrc)" />
@@ -18,7 +18,7 @@
         </md-card-header>
       </md-card>
 
-      <md-card id="volume" v-on:click.native="selectType('volume',' #e8ddff',' #7224ff')">
+      <md-card id="VOLUME" v-on:click.native="selectType(mainUnit[1],' #e8ddff',' #7224ff')">
         <md-card-header>
           <md-card-media>
             <img class="logo other-logo" v-bind:src="require('../assets/'+volumesrc)" />
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import services from '../services/Service'
+
 export default {
   name: "QuantityMeasurementCards",
   props: {
@@ -43,10 +45,12 @@ export default {
       tempsrc: "hotfilled.png",
       volumesrc: "beakerfilled.png",
       selected: "",
+      mainUnit:[]
     };
   },
   methods: {
     selectType: function (selectedUnit, background, border) {
+      console.log(selectedUnit)
       var styleproperty = document.getElementById(selectedUnit).style;
       if (this.selected.length != 0) {
         document.getElementById(this.selected).setAttribute("style", "");
@@ -59,7 +63,16 @@ export default {
       this.selected = selectedUnit;
       this.$emit("selectType", selectedUnit);
     },
+    getMainUnits:function(){
+        services.getMainUnits()
+          .then(response=>{
+            this.mainUnit=response.data
+          })
+    }
   },
+  created(){
+      this.getMainUnits();
+    }
 };
 </script>
 
@@ -97,7 +110,7 @@ export default {
   filter: grayscale(0%);
 }
 
-#temp:hover {
+#TEMPERATURE:hover {
   background: #ffeef0 0% 0% no-repeat padding-box;
   border: 1px solid #fd5160;
   letter-spacing: 0px;
@@ -105,7 +118,7 @@ export default {
   text-transform: capitalize;
 }
 
-#volume:hover {
+#VOLUME:hover {
   background: #e8ddff 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
   border: 1px solid #7224ff;

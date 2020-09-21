@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import services from '../services/Service'
 export default {
   name: "QuantityMeasurementConversion",
   props: {
@@ -48,24 +49,19 @@ export default {
     return {
       initial1: "1",
       initial2: "1000",
-      subUnits: [""],
+      subUnits: [],
       selectedFirstUnit: "",
       selectedSecondUnit: "",
     };
   },
   methods: {
     updateSubUnit: function () {
-      if (this.unit == "length") {
-        this.subUnits = ["Meters", "Centimeters", "Milimeter"];
-      }
-      if (this.unit == "temp") {
-        this.subUnits = ["Degree", "Celcius", "Farenheit"];
-      }
-      if (this.unit == "volume") {
-        this.subUnits = ["litre", "Mililitre"];
+      services.getSubUnits(this.unit)
+          .then(response=>{
+            this.subUnits=response.data
+          })
       }
     },
-  },
 };
 </script>
 
