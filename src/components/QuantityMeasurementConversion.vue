@@ -7,12 +7,12 @@
     <div>
       <md-content>
         <md-field>
-          <md-input v-model="initial1"></md-input>
+          <md-input @input="updateSecondValue()" v-model="initial1"></md-input>
         </md-field>
         <select
-          v-on:click="updateSubUnit"
           name="firstUnit"
           class="units"
+          @change="updateFirstValue()"
           v-model="selectedFirstUnit"
         >
           <option v-for="subunit in subUnits" v-bind:key="subunit">{{subunit}}</option>
@@ -21,10 +21,10 @@
 
       <md-content>
         <md-field>
-          <md-input v-model="initial2"></md-input>
+          <md-input @input="updateFirstValue()" v-model="initial2"></md-input>
         </md-field>
         <select
-          v-on:click="updateSubUnit"
+          @change="updateSecondValue()"
           name="secondUnit"
           class="units"
           v-model="selectedSecondUnit"
@@ -37,31 +37,60 @@
 </template>
 
 <script>
-import services from '../services/Service'
+import services from "../services/QuantityMeasurementService";
+import { eventBus } from "../main";
+
 export default {
   name: "QuantityMeasurementConversion",
-  props: {
-    unit: {
-      type: String,
-    },
-  },
   data() {
     return {
-      initial1: "1",
-      initial2: "1000",
+      initial1: "0",
+      initial2: "0",
       subUnits: [],
       selectedFirstUnit: "",
       selectedSecondUnit: "",
+      unit: "",
     };
   },
   methods: {
     updateSubUnit: function () {
-      services.getSubUnits(this.unit)
-          .then(response=>{
-            this.subUnits=response.data
-          })
-      }
+      services.getSubUnits(this.unit).then((response) => {
+        this.subUnits = response.data;
+      });
     },
+    updateFirstValue: function () {
+      services
+        .getConvertedValues(
+          this.initial2,
+          this.unit,
+          this.selectedSecondUnit,
+          this.selectedFirstUnit
+        )
+        .then((response) => {
+          this.initial1 = response.data.convertedValue;
+        });
+    },
+
+    updateSecondValue: function () {
+      services
+        .getConvertedValues(
+          this.initial1,
+          this.unit,
+          this.selectedFirstUnit,
+          this.selectedSecondUnit
+        )
+        .then((response) => {
+          this.initial2 = response.data.convertedValue;
+        });
+    },
+  },
+
+  created() {
+    eventBus.$on("selectType", (selectedType) => {
+      this.unit = selectedType;
+      this.updateSubUnit();
+    });
+  },
 };
 </script>
 
@@ -133,7 +162,7 @@ export default {
 }
 
 @media screen and (max-width: 479px) {
-  .conversion-container{
+  .conversion-container {
     height: 153px;
     width: 90%;
   }

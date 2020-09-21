@@ -30,7 +30,8 @@
 </template>
 
 <script>
-import services from '../services/Service'
+import services from "../services/QuantityMeasurementService";
+import { eventBus } from "../main";
 
 export default {
   name: "QuantityMeasurementCards",
@@ -45,12 +46,12 @@ export default {
       tempsrc: "hotfilled.png",
       volumesrc: "beakerfilled.png",
       selected: "",
-      mainUnit:[]
+      mainUnit: [],
     };
   },
   methods: {
     selectType: function (selectedUnit, background, border) {
-      console.log(selectedUnit)
+      console.log(selectedUnit);
       var styleproperty = document.getElementById(selectedUnit).style;
       if (this.selected.length != 0) {
         document.getElementById(this.selected).setAttribute("style", "");
@@ -61,18 +62,18 @@ export default {
       styleproperty.color = border;
       styleproperty.backgroundColor = background;
       this.selected = selectedUnit;
-      this.$emit("selectType", selectedUnit);
+      eventBus.$emit("selectType", selectedUnit);
     },
-    getMainUnits:function(){
-        services.getMainUnits()
-          .then(response=>{
-            this.mainUnit=response.data
-          })
-    }
+    getMainUnits: function () {
+      services.getMainUnits().then((response) => {
+        this.mainUnit = response.data;
+        console.log(this.mainUnit);
+      });
+    },
   },
-  created(){
-      this.getMainUnits();
-    }
+  created() {
+    this.getMainUnits();
+  },
 };
 </script>
 

@@ -10,6 +10,8 @@ Vue.use(VueRouter)
 Vue.use(VueMaterial)
 Vue.config.productionTip = false
 
+export const eventBus=new Vue();
+
 const router =new VueRouter({
   routes:Routes
 })
