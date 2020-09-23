@@ -59,26 +59,28 @@ export default {
       });
     },
     updateFirstValue: function () {
+      const conversionDTO = {
+            actualValue: this.initialTwo,
+            quantityType:this.unit,
+            initialUnit: this.selectedSecondUnit,
+            conversionUnit: this.selectedFirstUnit
+        }
       services
-        .getConvertedValues(
-          this.initialTwo,
-          this.unit,
-          this.selectedSecondUnit,
-          this.selectedFirstUnit
-        )
+        .getConvertedValues(conversionDTO)
         .then((response) => {
           this.initialOne = response.data.convertedValue;
         });
     },
 
     updateSecondValue: function () {
+      const conversionDTO = {
+            actualValue: this.initialOne,
+            quantityType:this.unit,
+            initialUnit: this.selectedFirstUnit,
+            conversionUnit: this.selectedSecondUnit
+        }
       services
-        .getConvertedValues(
-          this.initialOne,
-          this.unit,
-          this.selectedFirstUnit,
-          this.selectedSecondUnit
-        )
+        .getConvertedValues(conversionDTO)
         .then((response) => {
           this.initialTwo = response.data.convertedValue;
         });

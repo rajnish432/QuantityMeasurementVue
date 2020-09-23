@@ -9,13 +9,7 @@ class QuantityMeasurementService {
         return httpservice.get(`subunit`, mainUnit)
     }
 
-    getConvertedValues(input, mainUnit, firstSubunit, secondSubunit) {
-        const conversionDTO = {
-            actualValue: input,
-            quantityType: mainUnit,
-            initialUnit: firstSubunit,
-            conversionUnit: secondSubunit
-        }
+    getConvertedValues(conversionDTO) {
         return httpservice.post(conversionDTO)
     }
 }

@@ -4,11 +4,11 @@ const URL = 'http://localhost:8084';
 
 export default {
 
-    post(conversionDTO) {
+    post(DTO) {
         return axios({
             method: 'post',
             url: `${URL}/convert`,
-            data: conversionDTO,
+            data: DTO,
         })
     },
     get(apiurl, mainUnit) {
