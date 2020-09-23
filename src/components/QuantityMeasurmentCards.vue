@@ -35,11 +35,6 @@ import { eventBus } from "../main";
 
 export default {
   name: "QuantityMeasurementCards",
-  props: {
-    unit: {
-      type: String,
-    },
-  },
   data() {
     return {
       scalesrc: "scalefilled.png",
@@ -67,7 +62,6 @@ export default {
     getMainUnits: function () {
       services.getMainUnits().then((response) => {
         this.mainUnit = response.data;
-        console.log(this.mainUnit);
       });
     },
   },

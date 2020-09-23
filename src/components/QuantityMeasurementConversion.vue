@@ -7,7 +7,7 @@
     <div>
       <md-content>
         <md-field>
-          <md-input @input="updateSecondValue()" v-model="initial1"></md-input>
+          <md-input @input="updateSecondValue()" v-model="initialOne"></md-input>
         </md-field>
         <select
           name="firstUnit"
@@ -21,7 +21,7 @@
 
       <md-content>
         <md-field>
-          <md-input @input="updateFirstValue()" v-model="initial2"></md-input>
+          <md-input @input="updateFirstValue()" v-model="initialTwo"></md-input>
         </md-field>
         <select
           @change="updateSecondValue()"
@@ -44,8 +44,8 @@ export default {
   name: "QuantityMeasurementConversion",
   data() {
     return {
-      initial1: "0",
-      initial2: "0",
+      initialOne: "1",
+      initialTwo: "",
       subUnits: [],
       selectedFirstUnit: "",
       selectedSecondUnit: "",
@@ -61,27 +61,36 @@ export default {
     updateFirstValue: function () {
       services
         .getConvertedValues(
-          this.initial2,
+          this.initialTwo,
           this.unit,
           this.selectedSecondUnit,
           this.selectedFirstUnit
         )
         .then((response) => {
-          this.initial1 = response.data.convertedValue;
+          this.initialOne = response.data.convertedValue;
         });
     },
 
     updateSecondValue: function () {
       services
         .getConvertedValues(
-          this.initial1,
+          this.initialOne,
           this.unit,
           this.selectedFirstUnit,
           this.selectedSecondUnit
         )
         .then((response) => {
-          this.initial2 = response.data.convertedValue;
+          this.initialTwo = response.data.convertedValue;
         });
+    },
+  },
+
+  watch: {
+    subUnits: function () {
+      this.selectedFirstUnit = this.subUnits[0];
+      this.selectedSecondUnit = this.subUnits[1];
+      this.initialOne = "1";
+      this.updateSecondValue();
     },
   },
 
